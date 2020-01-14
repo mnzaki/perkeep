@@ -38,6 +38,7 @@ import (
 	"perkeep.org/internal/geocode"
 	"perkeep.org/internal/httputil"
 	"perkeep.org/internal/netutil"
+	"perkeep.org/internal/mdns"
 	"perkeep.org/internal/osutil"
 	"perkeep.org/internal/osutil/gce"
 	"perkeep.org/pkg/buildinfo"
@@ -106,6 +107,7 @@ var (
 	flagSyslog      = flag.Bool("syslog", false, "Log everything only to syslog. It is an error to use this flag on windows.")
 	flagKeepGoing   = flag.Bool("keep-going", false, "Continue after reindex or blobpacked recovery errors")
 	flagPollParent  bool
+	shutDownMDNS    func()
 )
 
 func init() {
@@ -298,6 +300,7 @@ func handleSignals(shutdownc <-chan io.Closer) {
 			}()
 			select {
 			case <-donec:
+				shutDownMDNS()
 				log.Printf("Shut down.")
 				osExit(0)
 			case <-time.After(2 * time.Second):
@@ -502,6 +505,9 @@ func Main() {
 			log.Printf("Could not reach app %v: %v", appName, err)
 		}
 	}
+
+	shutDownMDNS = mdns.StartMDNSService()
+
 	log.Printf("server: available at %s", urlToOpen)
 
 	if testHookServerUp.call(); !testHookWaitToShutdown.call() {

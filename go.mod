@@ -28,6 +28,7 @@ require (
 	github.com/gopherjs/jquery v0.0.0-20180404123100-3ba2b901425e
 	github.com/gorilla/websocket v1.4.0
 	github.com/hashicorp/golang-lru v0.5.1 // indirect
+	github.com/hashicorp/mdns v1.0.1
 	github.com/hjfreyer/taglib-go v0.0.0-20151027170453-0ef8bba9c41b
 	github.com/jonas-p/go-shp v0.1.1 // indirect
 	github.com/kr/fs v0.1.0 // indirect
@@ -36,7 +37,7 @@ require (
 	github.com/mailgun/mailgun-go v0.0.0-20171127222028-17e8bd11e87c
 	github.com/mattn/go-mastodon v0.0.5-0.20190517015615-8f6192e26b66
 	github.com/mattn/go-sqlite3 v1.6.0
-	github.com/miekg/dns v0.0.0-20161003181808-3f1f7c8ec9ea
+	github.com/miekg/dns v1.0.14
 	github.com/nf/cr2 v0.0.0-20140528043846-05d46fef4f2f
 	github.com/onsi/ginkgo v1.8.0 // indirect
 	github.com/onsi/gomega v1.5.0 // indirect
